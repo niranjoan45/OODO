@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="cart-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-leaf"></i>
+                <span>EcoFinds</span>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="product_feed.html" class="nav-link">
+                    <i class="fas fa-search"></i>
+                    <span>Browse</span>
+                </a>
+                <a href="cart.html" class="nav-link active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="purchases.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+            </div>
+            <div class="nav-user">
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Shopping Cart</h1>
+                <p>Review your selected items before checkout</p>
+            </div>
+
+            <div class="cart-container">
+                <div class="cart-content">
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+
+                    <div class="empty-cart" id="emptyCart" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Your cart is empty</h3>
+                        <p>Discover amazing second-hand treasures to add to your cart!</p>
+                        <a href="product_feed.html" class="browse-products-btn">
+                            <i class="fas fa-search"></i>
+                            Browse Products
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        
+                        <div class="summary-row">
+                            <span>Items (<span id="itemCount">0</span>)</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span class="free-shipping">FREE</span>
+                        </div>
+                        
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+
+                        <div class="environmental-impact">
+                            <div class="impact-header">
+                                <i class="fas fa-leaf"></i>
+                                <span>Environmental Impact</span>
+                            </div>
+                            <div class="impact-stats">
+                                <div class="impact-item">
+                                    <i class="fas fa-recycle"></i>
+                                    <span><span id="itemsSaved">0</span> items saved from waste</span>
+                                </div>
+                                <div class="impact-item">
+                                    <i class="fas fa-tree"></i>
+                                    <span>Reduced carbon footprint</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="checkoutBtn" class="checkout-btn" disabled>
+                            <i class="fas fa-credit-card"></i>
+                            Proceed to Checkout
+                        </button>
+
+                        <div class="secure-checkout">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure checkout guaranteed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enhanced Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3>Complete Your Order</h3>
+                <button class="close-modal" onclick="ModalManager.closeModal('checkoutModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <!-- Account Confirmation Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Confirm Your Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkoutFullName">Full Name *</label>
+                                <input type="text" id="checkoutFullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutEmail">Email Address *</label>
+                                <input type="email" id="checkoutEmail" name="email" required readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkoutPhone">Phone Number *</label>
+                                <input type="tel" id="checkoutPhone" name="phone" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Information Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-truck"></i> Delivery Information</h4>
+                        <div class="form-group">
+                            <label for="deliveryAddress">Delivery Address *</label>
+                            <textarea id="deliveryAddress" name="deliveryAddress" placeholder="Enter your complete delivery address including city, state, and postal code" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryNotes">Delivery Notes (Optional)</label>
+                            <textarea id="deliveryNotes" name="deliveryNotes" placeholder="Any special delivery instructions..." rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-receipt"></i> Order Summary</h4>
+                        <div id="checkoutSummary" class="checkout-summary">
+                            <!-- Order summary will be loaded here -->
+                        </div>
+                        <div class="environmental-impact">
+                            <div class="impact-card">
+                                <i class="fas fa-leaf"></i>
+                                <div class="impact-text">
+                                    <strong>Environmental Impact</strong>
+                                    <p>By purchasing second-hand items, you're helping reduce waste and carbon footprint!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" onclick="ModalManager.closeModal('checkoutModal')">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Cart
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-check-circle"></i>
+                            Confirm Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div id="orderSuccessModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Order Placed Successfully!</h3>
+                <p>Thank you for your purchase. Your order has been confirmed and will be processed shortly.</p>
+                <div class="order-details" id="orderDetailsSuccess">
+                    <!-- Order details will be shown here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="ModalManager.closeModal('orderSuccessModal'); window.location.href='purchases.html'">
+                        <i class="fas fa-history"></i>
+                        View Order History
+                    </button>
+                    <button class="btn btn-outline" onclick="ModalManager.closeModal('orderSuccessModal'); window.location.href='product_feed.html'">
+                        <i class="fas fa-shopping-bag"></i>
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading your cart...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

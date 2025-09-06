@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dashboard-page" data-role="seller">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>EcoFinds</span>
+            </div>
+            <div class="nav-menu">
+                <a href="seller-dashboard.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="add_product.html" class="nav-link">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Product</span>
+                </a>
+                <a href="my_listings.html" class="nav-link">
+                    <i class="fas fa-list"></i>
+                    <span>My Listings</span>
+                </a>
+                <a href="purchases.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Sales</span>
+                </a>
+                <div class="nav-user">
+                    <div class="user-menu">
+                        <button class="user-btn" id="userMenuBtn">
+                            <i class="fas fa-store"></i>
+                            <span id="userName">Seller</span>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="#" onclick="AuthManager.logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Seller Dashboard</h1>
+                    <p>Manage your products and track your sales performance</p>
+                </div>
+                <div class="welcome-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalListings">0</div>
+                            <div class="stat-label">Active Listings</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalEarnings">$0</div>
+                            <div class="stat-label">Total Earnings</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="soldItems">0</div>
+                            <div class="stat-label">Items Sold</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalViews">0</div>
+                            <div class="stat-label">Total Views</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-cards">
+                    <a href="add_product.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h3>Add New Product</h3>
+                        <p>List a new item for sale</p>
+                    </a>
+                    <a href="my_listings.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <h3>Manage Listings</h3>
+                        <p>Edit or remove your products</p>
+                    </a>
+                    <a href="purchases.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>View Sales</h3>
+                        <p>Track your sales performance</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Recent Listings -->
+            <section class="recent-listings">
+                <h2>Recent Listings</h2>
+                <div class="products-grid" id="recentListings">
+                    <!-- Recent listings will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Sales Performance -->
+            <section class="sales-performance">
+                <h2>Sales Performance</h2>
+                <div class="performance-container">
+                    <div class="performance-card">
+                        <h3>This Month</h3>
+                        <div class="performance-stats">
+                            <div class="performance-stat">
+                                <span class="stat-label">Sales</span>
+                                <span class="stat-value" id="monthlySales">$0</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="stat-label">Items Sold</span>
+                                <span class="stat-value" id="monthlyItems">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="performance-card">
+                        <h3>All Time</h3>
+                        <div class="performance-stats">
+                            <div class="performance-stat">
+                                <span class="stat-label">Total Revenue</span>
+                                <span class="stat-value" id="totalRevenue">$0</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="stat-label">Items Sold</span>
+                                <span class="stat-value" id="totalSold">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize seller dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof SellerDashboardPage !== 'undefined') {
+                SellerDashboardPage.init();
+            } else {
+                DashboardPage.init();
+            }
+        });
+    </script>
+</body>
+</html>

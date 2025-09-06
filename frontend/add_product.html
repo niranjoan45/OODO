@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="add-product-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-leaf"></i>
+                <span>EcoFinds</span>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="product_feed.html" class="nav-link">
+                    <i class="fas fa-search"></i>
+                    <span>Browse</span>
+                </a>
+                <a href="add_product.html" class="nav-link active">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Product</span>
+                </a>
+                <a href="my_listings.html" class="nav-link">
+                    <i class="fas fa-list"></i>
+                    <span>My Listings</span>
+                </a>
+                <a href="purchases.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+            </div>
+            <div class="nav-user">
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Add New Product</h1>
+                <p>List your pre-loved items and give them a new life</p>
+            </div>
+
+            <div class="add-product-container">
+                <form id="addProductForm" class="product-form">
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="productTitle">Product Title *</label>
+                            <input type="text" id="productTitle" name="title" placeholder="Enter a descriptive title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">Description</label>
+                            <textarea id="productDescription" name="description" placeholder="Describe your item's condition, features, and any relevant details" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productCategory">Category *</label>
+                                <select id="productCategory" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Clothing">Clothing</option>
+                                    <option value="Furniture">Furniture</option>
+                                    <option value="Books">Books</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Home & Garden">Home & Garden</option>
+                                    <option value="Toys">Toys</option>
+                                    <option value="Art & Collectibles">Art & Collectibles</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productCondition">Condition *</label>
+                                <select id="productCondition" name="condition" required>
+                                    <option value="">Select Condition</option>
+                                    <option value="Excellent">Excellent - Like new</option>
+                                    <option value="Very Good">Very Good - Minor wear</option>
+                                    <option value="Good">Good - Some wear</option>
+                                    <option value="Fair">Fair - Well used</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productPrice">Price ($) *</label>
+                            <div class="price-input-container">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="productPrice" name="price" placeholder="0.00" min="0" step="0.01" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Product Image</h3>
+                        
+                        <div class="image-upload-section">
+                            <div class="image-preview" id="imagePreview">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-camera"></i>
+                                    <p>Add a photo of your item</p>
+                                    <span>Click to browse or drag and drop</span>
+                                </div>
+                            </div>
+                            
+                            <div class="image-input-group">
+                                <label for="productImageUrl">Image URL</label>
+                                <input type="url" id="productImageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
+                                <button type="button" id="previewImageBtn" class="preview-btn">
+                                    <i class="fas fa-eye"></i>
+                                    Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Sustainability Impact</h3>
+                        <div class="impact-info">
+                            <div class="impact-item">
+                                <i class="fas fa-recycle"></i>
+                                <span>By selling this item, you're preventing waste and promoting reuse!</span>
+                            </div>
+                            <div class="impact-item">
+                                <i class="fas fa-leaf"></i>
+                                <span>Every second-hand purchase reduces environmental impact</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="history.back()">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </button>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            List Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Adding your product...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Products - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="products-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-leaf"></i>
+                <span>EcoFinds</span>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="product_feed.html" class="nav-link active">
+                    <i class="fas fa-search"></i>
+                    <span>Browse</span>
+                </a>
+                <a href="add_product.html" class="nav-link seller-only">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Product</span>
+                </a>
+                <a href="my_listings.html" class="nav-link seller-only">
+                    <i class="fas fa-list"></i>
+                    <span>My Listings</span>
+                </a>
+                <a href="cart.html" class="nav-link user-only">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="purchases.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+            </div>
+            <div class="nav-user">
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Search and Filters -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search for products...">
+                        <button type="button" id="searchBtn" class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category</label>
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Books">Books</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Home & Garden">Home & Garden</option>
+                            <option value="Toys">Toys</option>
+                            <option value="Art & Collectibles">Art & Collectibles</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="conditionFilter">Condition</label>
+                        <select id="conditionFilter">
+                            <option value="">Any Condition</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Very Good">Very Good</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="priceRange">Price Range</label>
+                        <div class="price-inputs">
+                            <input type="number" id="minPrice" placeholder="Min" min="0">
+                            <span>to</span>
+                            <input type="number" id="maxPrice" placeholder="Max" min="0">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sortBy">Sort By</label>
+                        <select id="sortBy">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="price_low">Price: Low to High</option>
+                            <option value="price_high">Price: High to Low</option>
+                            <option value="popular">Most Popular</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="clearFilters" class="clear-filters-btn">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </div>
+            </section>
+
+            <!-- Products Grid -->
+            <section class="products-section">
+                <div class="section-header">
+                    <h2>Available Products</h2>
+                    <div class="results-info">
+                        <span id="resultsCount">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded here -->
+                </div>
+
+                <div class="load-more-container">
+                    <button id="loadMoreBtn" class="load-more-btn">
+                        <span>Load More Products</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Product Quick View Modal -->
+    <div id="quickViewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Product Details</h3>
+                <button class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="quickViewContent">
+                <!-- Quick view content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading products...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

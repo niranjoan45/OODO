@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase History - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="purchases-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-leaf"></i>
+                <span>EcoFinds</span>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="product_feed.html" class="nav-link">
+                    <i class="fas fa-search"></i>
+                    <span>Browse</span>
+                </a>
+                <a href="add_product.html" class="nav-link seller-only">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Product</span>
+                </a>
+                <a href="my_listings.html" class="nav-link seller-only">
+                    <i class="fas fa-list"></i>
+                    <span>My Listings</span>
+                </a>
+                <a href="cart.html" class="nav-link user-only">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="purchases.html" class="nav-link active">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+            </div>
+            <div class="nav-user">
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 id="pageTitle">Purchase History</h1>
+                <p id="pageSubtitle">Track your orders and environmental impact</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <section class="purchase-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalOrders">0</h3>
+                        <p>Total Orders</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalSpent">$0</h3>
+                        <p>Total Spent</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="itemsRescued">0</h3>
+                        <p>Items Rescued</p>
+                    </div>
+                </div>
+                <div class="stat-card seller-only">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalEarnings">$0</h3>
+                        <p>Total Earnings</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Navigation -->
+            <section class="tab-navigation">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="purchases">
+                        <i class="fas fa-shopping-bag"></i>
+                        My Purchases
+                    </button>
+                    <button class="tab-btn seller-only" data-tab="sales">
+                        <i class="fas fa-chart-line"></i>
+                        My Sales
+                    </button>
+                </div>
+            </section>
+
+            <!-- Purchases Tab -->
+            <section class="tab-content active" id="purchasesTab">
+                <div class="orders-container">
+                    <div class="orders-list" id="ordersList">
+                        <!-- Orders will be loaded here -->
+                    </div>
+
+                    <div class="empty-state" id="emptyPurchases" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>No purchases yet</h3>
+                        <p>Start shopping for sustainable treasures!</p>
+                        <a href="product_feed.html" class="browse-products-btn">
+                            <i class="fas fa-search"></i>
+                            Browse Products
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sales Tab (Seller Only) -->
+            <section class="tab-content seller-only" id="salesTab">
+                <div class="sales-container">
+                    <div class="sales-list" id="salesList">
+                        <!-- Sales will be loaded here -->
+                    </div>
+
+                    <div class="empty-state" id="emptySales" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>No sales yet</h3>
+                        <p>Start selling your pre-loved items!</p>
+                        <a href="add_product.html" class="add-product-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Product
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Order Details</h3>
+                <button class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="orderDetailsContent">
+                <!-- Order details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading your history...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

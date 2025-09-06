@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="signup-page">
+    <div class="signup-container">
+        <div class="signup-header">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <h1>EcoFinds</h1>
+            </div>
+            <p class="tagline">Join the sustainable marketplace</p>
+        </div>
+
+        <div class="signup-form-container">
+            <div class="role-selector">
+                <h2>Choose Your Role</h2>
+                <div class="role-cards">
+                    <div class="role-card" data-role="user">
+                        <div class="role-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>Buyer</h3>
+                        <p>Find amazing second-hand treasures</p>
+                    </div>
+                    <div class="role-card" data-role="seller">
+                        <div class="role-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Seller</h3>
+                        <p>Sell your pre-loved items</p>
+                    </div>
+                    <div class="role-card" data-role="admin">
+                        <div class="role-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Admin</h3>
+                        <p>Manage the marketplace</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="signupForm" class="signup-form">
+                <div class="selected-role">
+                    <span id="selectedRoleText">Select a role above</span>
+                    <input type="hidden" id="selectedRole" name="role" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="input-container">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="input-container">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="Password" required>
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <textarea id="address" name="address" placeholder="Address (Optional)" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="signup-btn" disabled>
+                    <span class="btn-text">Create Account</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+
+                <div class="form-footer">
+                    <p>Already have an account? <a href="index.html" class="login-link">Sign in here</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="benefits-preview">
+            <div class="benefit">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Save Money</span>
+            </div>
+            <div class="benefit">
+                <i class="fas fa-heart"></i>
+                <span>Help Environment</span>
+            </div>
+            <div class="benefit">
+                <i class="fas fa-handshake"></i>
+                <span>Support Community</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Creating your account...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

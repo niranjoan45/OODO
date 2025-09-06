@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - EcoFinds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="settings-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>EcoFinds</span>
+            </div>
+            <div class="nav-menu">
+                <a href="javascript:history.back()" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </a>
+                <a href="settings.html" class="nav-link active">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <div class="nav-user">
+                    <div class="user-menu">
+                        <button class="user-btn" id="userMenuBtn">
+                            <i class="fas fa-user"></i>
+                            <span id="userName">User</span>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="#" onclick="AuthManager.logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Settings Header -->
+            <section class="settings-header">
+                <h1>Account Settings</h1>
+                <p>Manage your profile information and account preferences</p>
+            </section>
+
+            <!-- Settings Content -->
+            <div class="settings-container">
+                <!-- Profile Picture Section -->
+                <section class="settings-section">
+                    <h2>Profile Picture</h2>
+                    <div class="profile-picture-container">
+                        <div class="profile-picture">
+                            <img id="profilePicture" src="https://via.placeholder.com/120x120?text=User" alt="Profile Picture">
+                            <div class="profile-picture-overlay">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <div class="profile-picture-actions">
+                            <input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+                            <button class="btn btn-outline" onclick="document.getElementById('profilePictureInput').click()">
+                                <i class="fas fa-upload"></i>
+                                Upload Photo
+                            </button>
+                            <button class="btn btn-outline" id="removeProfilePicture">
+                                <i class="fas fa-trash"></i>
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Personal Information -->
+                <section class="settings-section">
+                    <h2>Personal Information</h2>
+                    <form id="profileForm" class="settings-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" rows="3" placeholder="Enter your full address"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Change Password -->
+                <section class="settings-section">
+                    <h2>Change Password</h2>
+                    <form id="passwordForm" class="settings-form">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <div class="input-container">
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                                <button type="button" class="toggle-password" data-target="currentPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <div class="input-container">
+                                <input type="password" id="newPassword" name="newPassword" required minlength="6">
+                                <button type="button" class="toggle-password" data-target="newPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <div class="input-container">
+                                <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                                <button type="button" class="toggle-password" data-target="confirmPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key"></i>
+                                Update Password
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Account Actions -->
+                <section class="settings-section">
+                    <h2>Account Actions</h2>
+                    <div class="account-actions">
+                        <button class="btn btn-outline" onclick="AuthManager.logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Sign Out
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize settings page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof SettingsPage !== 'undefined') {
+                SettingsPage.init();
+            }
+        });
+    </script>
+</body>
+</html>
